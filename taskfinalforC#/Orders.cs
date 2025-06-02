@@ -59,11 +59,13 @@ namespace taskfinalforC_
             labelPageInfo.Text = $"Page {currentPage} of {totalPages}";
 
             UpdateTotalSum();
+
             var products = _context.Products.Select(o => new
             {
                 o.Name
             })
                 .ToList();
+            comboBoxforshowproducts.DisplayMember = "Name";
             comboBoxforshowproducts.DataSource = products;
         }
 
@@ -299,15 +301,14 @@ namespace taskfinalforC_
 
         private void comboBoxforshowproducts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxforshowproducts.SelectedValue is int selectedProductId)
-            {
-                var product = _context.Products.FirstOrDefault(p => p.Id == selectedProductId);
+            
+                var product = _context.Products.FirstOrDefault(p => p.Name == comboBoxforshowproducts.Text);
                 if (product != null)
                 {
                     selectedproduct = product.Id;
 
                 }
-            }
+            
         }
 
         private void label11_Click(object sender, EventArgs e)
@@ -334,13 +335,13 @@ namespace taskfinalforC_
                 return;
             }
 
-            int productId = (int)comboBoxforshowproducts.SelectedValue;
+            //int productId = (int)comboBoxforshowproducts.SelectedValue;
 
             var newOrder = new Order
             {
                 CustomerName = customerName,
                 OrderDate = orderDate,
-                ProductId = productId,
+                ProductId = selectedproduct,
                 Quantity = quantity
             };
 

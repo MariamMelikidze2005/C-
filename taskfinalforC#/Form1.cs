@@ -17,6 +17,7 @@ namespace taskfinalforC_
         {
             InitializeComponent();
             LoadCategoriesToComboBox();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,12 +42,17 @@ namespace taskfinalforC_
 
         private void LoadCategoriesToGrid()
         {
-            dataGridViewforshowcategory.DataSource = _context.Categories.Select(c => new
+            var Categories  = _context.Categories.Select(c => new
             {
                 კატეგორიისID = c.Id,
                 კატეგორიისსახელი = c.Name
             }).ToList();
-        }
+
+            dataGridViewforshowcategory.DataSource = Categories;
+            comboBoxforchooseproductcategoryfromcategorytable.DisplayMember = "კატეგორიისსახელი";
+            comboBoxforchooseproductcategoryfromcategorytable.DataSource = Categories;
+        
+    }
 
         private void LoadCategoriesToComboBox()
         {
@@ -81,6 +87,7 @@ namespace taskfinalforC_
         private void button3_Click(object sender, EventArgs e)
         {
             LoadProductsToGrid();
+            LoadCategoriesToGrid();
         }
 
         private void LoadProductsToGrid()
