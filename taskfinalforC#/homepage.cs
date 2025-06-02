@@ -6,5 +6,13 @@ namespace taskfinalforC_
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Loginin loginForm = new Loginin();
+            loginForm.Show(); // or loginForm.ShowDialog(); for modal
+            this.Hide(); // Optional: hide the current form
+        }
+
     }
 }

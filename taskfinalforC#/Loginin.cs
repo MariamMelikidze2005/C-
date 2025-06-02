@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using taskfinalfor_.db; 
 
 namespace taskfinalforC_
 {
@@ -16,5 +11,33 @@ namespace taskfinalforC_
         {
             InitializeComponent();
         }
+
+        private void buttontocheckuser_Click(object sender, EventArgs e)
+        {
+            string username = textBoxforusername.Text.Trim();
+            string password = textBoxforpassword.Text;
+
+            using (var context = new AppDbContext())
+            {
+                var user = context.Users
+                    .FirstOrDefault(u => u.UserName == username && u.PAssword == password);
+
+                if (user != null)
+                {
+                    MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Open Form2 and hide the login form
+                    Form2 form2 = new Form2();
+                    form2.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid username or password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
     }
 }
+

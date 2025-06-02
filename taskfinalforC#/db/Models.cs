@@ -38,8 +38,15 @@ namespace taskfinalforC_.db
 
         public int Quantity { get; set; }
 
-        // არ არის საჭირო ბაზაში შენახვა — გამოვიყენებთ გამოთვლით
-        public decimal TotalPrice => Product?.Price * Quantity ?? 0;
+    }
+
+    public class User
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+
+        public string PAssword { get; set; }
+        
     }
 
 }
